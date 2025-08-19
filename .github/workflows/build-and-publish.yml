@@ -50,3 +50,31 @@ jobs:
           tags: |
             ghcr.io/${{ github.repository_owner }}/kroket:latest
             ghcr.io/${{ github.repository_owner }}/kroket:${{ steps.tag.outputs.TAG }}
+
+      # Terraform deployment steps
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: latest
+
+      - name: Terraform Init
+        working-directory: ./terraform
+        run: terraform init
+
+      - name: Terraform Validate
+        working-directory: ./terraform
+        run: terraform validate
+
+      - name: Terraform Plan
+        working-directory: ./terraform
+        run: terraform plan
+        env:
+          TF_VAR_nexaa_username: ${{ secrets.NEXAA_USERNAME }}
+          TF_VAR_nexaa_password: ${{ secrets.NEXAA_PASSWORD }}
+
+      - name: Terraform Apply
+        working-directory: ./terraform
+        run: terraform apply -auto-approve
+        env:
+          TF_VAR_nexaa_username: ${{ secrets.NEXAA_USERNAME }}
+          TF_VAR_nexaa_password: ${{ secrets.NEXAA_PASSWORD }}
