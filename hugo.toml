@@ -36,7 +36,3 @@ copyright = "© 2021 <a href='https://github.com/wayjam/hugo-theme-fluency'>Hugo
   resampleFilter = "box"
   quality = 75
   anchor = "smart"
-
-# Enable page resources for better image handling
-[build]
-  useResourceCacheWhen = "always"
