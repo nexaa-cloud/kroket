@@ -19,7 +19,7 @@ resource "nexaa_namespace" "kroket" {
 resource "nexaa_container" "container" {
   name      = "kroket-friday"
   namespace = nexaa_namespace.kroket.name
-  image     = "nginx:latest"
+  image     = var.container_image
 
   resources = {
     cpu = 0.25
@@ -30,9 +30,10 @@ resource "nexaa_container" "container" {
 
   ingresses = [
     {
-      domain_name = null
+      domain_name = "kroket.nexaa.io"
       port        = 80
       tls         = true
+      allowlist = ["0.0.0.0/0"]
     }
   ]
 
@@ -43,5 +44,6 @@ resource "nexaa_container" "container" {
 
   scaling = {
     type = "manual"
+    manual_input = 1
   }
 }

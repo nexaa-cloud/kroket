@@ -9,3 +9,9 @@ variable "nexaa_password" {
   type        = string
   sensitive   = true
 }
+
+variable "container_image" {
+  description = "Docker image to deploy"
+  type        = string
+  default     = "ghcr.io/nexaa-cloud/kroket:latest"
+}

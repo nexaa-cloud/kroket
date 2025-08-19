@@ -78,3 +78,4 @@ jobs:
         env:
           TF_VAR_nexaa_username: ${{ secrets.NEXAA_USERNAME }}
           TF_VAR_nexaa_password: ${{ secrets.NEXAA_PASSWORD }}
+          TF_VAR_container_image: ghcr.io/${{ github.repository_owner }}/kroket:${{ steps.tag.outputs.TAG }}
