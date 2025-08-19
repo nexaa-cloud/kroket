@@ -40,4 +40,8 @@ resource "nexaa_container" "container" {
     port = 80
     path = "/"
   }
+
+  scaling = {
+    type = "manual"
+  }
 }
