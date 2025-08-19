@@ -24,3 +24,19 @@ copyright = "© 2021 <a href='https://github.com/wayjam/hugo-theme-fluency'>Hugo
     defer
   ></script>
   '''
+
+[markup]
+   [markup.goldmark]
+     [markup.goldmark.parser]
+       wrapStandAloneImageWithinParagraph = false
+     [markup.goldmark.parser.attribute]
+       block = true
+
+[imaging]
+  resampleFilter = "box"
+  quality = 75
+  anchor = "smart"
+
+# Enable page resources for better image handling
+[build]
+  useResourceCacheWhen = "always"
