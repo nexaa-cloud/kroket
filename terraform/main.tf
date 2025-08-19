@@ -33,7 +33,6 @@ resource "nexaa_container" "container" {
       domain_name = "kroket.nexaa.io"
       port        = 80
       tls         = true
-      allow_list = ["0.0.0.0/0"]
     }
   ]
 
