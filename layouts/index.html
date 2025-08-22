@@ -1,48 +1,31 @@
 {{ define "main" }}
-<main id="main" class="index-page homepage" role="main">
-  <div class="container has-padding">
-    {{ $pageSize := site.Params.pageSize.index | default 5 }}
-    {{ $showSection := false }}
-    {{ if gt (len site.Params.mainSections) 1 }} {{ $showSection = true }} {{ end}}
 
-    {{ $paginator := .Paginate (where site.RegularPages "Section" "in" site.Params.mainSections) $pageSize }}
-    <div class="article-list">
-      {{ range $paginator.Pages }}
-      <article class="post">
-        <h3 class="title">
-          <a href="{{ .Permalink }}" title="{{ .Title }}">{{ .Title }}</a>
-        </h3>
+<h1>About</h1>
+<p>
+    It’s Friday, your week has been tough, and the kroket is calling, so don’t leave it frying.
+    This site exists solely to justify your snack and make it sound like a cultural obligation.
+</p> 
+<p> Hosted by <a href="https://nexaa.io?utm_source=kroket&utm_medium=about&utm_campaign=2025" target="_blank">Nexaa</a> maintained on <a href="https://github.com/nexaa-cloud/kroket" target="_blank">Github</a>
+</p>
+<hr>
+<div class="posts-list">
+{{ with .Site.GetPage "/posts" }}
+    {{ range (sort .Pages "Date" "desc" (where .Pages ".Params.private" "!=" true))}}
+        <div class="post">
+            <p>
+                <div class="date">{{ .Date | time.Format ":date_medium" }}</div>
+                <h1><a href="{{ .Permalink }}" title="{{ .Title }}">{{ .Title }}</a></h1>
+                {{ with .Resources.ByType "image" }}
+                    {{ with index . 0 }}
+                        <img src="{{ .RelPermalink }}" alt="">
+                    {{ end }}
+                {{ end }}
+                {{ .Content }}
+            </p>
+        </div>    
+    {{ end }}
+{{ end }}
+</div>
 
-        <!-- Process and display images using Hugo's image processing pipeline -->
-        {{ $permalink := .Permalink }}
-        {{ range .Resources.ByType "image" }}
-          {{ $image := . }}
-          {{ $resized := $image.Resize "400x" }}
-          <div style="margin: 1rem 0;">
-            <a href="{{ $permalink }}">
-              <img src="{{ $resized.RelPermalink }}" alt="{{ $.Title }}" style="max-height: 250px; object-fit: cover;">
-            </a>
-          </div>
-          {{ break }}
-        {{ end }}
 
-        {{ if not site.Params.disableIndexSummary }}
-          <div class="content summary">
-            <p>{{ .Summary | safeHTML }}</p>
-            {{ if .Truncated }}
-              <span class="hellip">&hellip;</span>
-            {{ end }}
-          </div>
-          <a class="readmore" href="{{ .Permalink }}" aria-label="{{ i18n "readMore" }}">{{ i18n "readMore" }}</a>
-        {{ end }}
-        <div class="date {{if not site.Params.disableIndexSummary }}float-right{{end}}">
-          {{ if $showSection }}<span class="section"><a href="{{ .Section | relURL }}">{{ .Section }}</a></span>{{ end }}
-          <time datetime="{{ .Date.Format "2006-01-02T15:04:05Z0700" }}" class="date">{{ .Date.Format "January 02, 2006" }}</time>
-        </div>
-      </article>
-      {{ end }}
-    </div>
-    {{ partial "pagination.html" . }}
-  </div>
-</main>
 {{ end }}

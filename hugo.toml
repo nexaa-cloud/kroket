@@ -1,7 +1,7 @@
 baseURL = 'https://kroket.nexaa.io/'
 languageCode = 'en-us'
 title = 'Kroket Friday'
-theme = 'fluency'
+theme = 'hugo-theme-console'
 [menus]
   [[menus.footer]]
     name= 'Github'
@@ -13,10 +13,7 @@ theme = 'fluency'
     url= 'https://nexaa.io?utm_source=kroket&utm_medium=footer&utm_campaign=2025'
     weight = 30
 
-copyright = "© 2021 <a href='https://github.com/wayjam/hugo-theme-fluency'>Hugo Theme Fluency</a>."
-
 [params]
-  # Add your custom JavaScript here
   customScript = '''
   <script
     src="https://analytics.nexaa.io/api/script.js"
@@ -24,13 +21,6 @@ copyright = "© 2021 <a href='https://github.com/wayjam/hugo-theme-fluency'>Hugo
     defer
   ></script>
   '''
-
-[markup]
-   [markup.goldmark]
-     [markup.goldmark.parser]
-       wrapStandAloneImageWithinParagraph = false
-     [markup.goldmark.parser.attribute]
-       block = true
 
 [imaging]
   resampleFilter = "box"
