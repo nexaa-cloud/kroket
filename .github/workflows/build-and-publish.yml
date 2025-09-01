@@ -85,10 +85,16 @@ jobs:
       - name: Remove container from terraform.tfstate
         working-directory: ./terraform
         run: terraform state rm nexaa_container.container
+        env:
+          TF_VAR_nexaa_username: ${{ secrets.NEXAA_USERNAME }}
+          TF_VAR_nexaa_password: ${{ secrets.NEXAA_PASSWORD }}
 
       - name: Terraform Import
         working-directory: ./terraform
         run: terraform import nexaa_container.container nexaa-kroket/kroket-friday
+        env:
+          TF_VAR_nexaa_username: ${{ secrets.NEXAA_USERNAME }}
+          TF_VAR_nexaa_password: ${{ secrets.NEXAA_PASSWORD }}
 
       - name: Terraform Plan
         working-directory: ./terraform
