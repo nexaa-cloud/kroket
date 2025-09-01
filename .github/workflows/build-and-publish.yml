@@ -82,14 +82,6 @@ jobs:
         working-directory: ./terraform
         run: terraform validate
 
-      - name: Remove container from terraform.tfstate
-        working-directory: ./terraform
-        run: terraform state rm nexaa_container.container
-
-      - name: Terraform Import
-        working-directory: ./terraform
-        run: terraform import nexaa_container.container nexaa-kroket/kroket-friday
-
       - name: Terraform Plan
         working-directory: ./terraform
         run: terraform plan
