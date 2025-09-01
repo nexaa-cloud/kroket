@@ -59,7 +59,7 @@ resource "nexaa_container" "container" {
 
   timeouts {
     create = "30s"
-    update = "30s"
-    delete = "30s"
+    update = "60s"
+    delete = "60s"
   }
 }
