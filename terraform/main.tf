@@ -3,7 +3,7 @@ terraform {
   required_providers {
     nexaa = {
       source  = "nexaa-cloud/nexaa"
-      version = ">= 0.1.23"
+      version = "0.1.24"
     }
   }
 }
@@ -55,5 +55,11 @@ resource "nexaa_container" "container" {
   scaling = {
     type = "manual"
     manual_input = 1
+  }
+
+  timeouts {
+    create = "30s"
+    update = "30s"
+    delete = "30s"
   }
 }
